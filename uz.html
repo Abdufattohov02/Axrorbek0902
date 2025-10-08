@@ -74,6 +74,7 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 .btn:hover{opacity:0.85;transform:translateY(-2px);}
 .btn i {font-size:1.2em;}
 
+/* Telefon raqam paneli */
 .choices-panel{
   display:none;
   flex-direction:column;
@@ -129,6 +130,18 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 }
 
 .phone-choices{position:relative;}
+
+/* Ikki kichik tugma bitta qatorda */
+.small-buttons-row{
+  display:flex;
+  gap:10px;
+  width:100%;
+}
+.small-buttons-row .btn{
+  flex:1;
+  padding:10px 0;
+  font-size:0.9rem;
+}
 
 @media (max-width:420px){
   .card{padding:20px;}
@@ -193,7 +206,11 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
       </div>
     </div>
 
-    <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> Asosiy sahifaga</a>
+    <!-- Katta tugmalardan kichik bitta qator tugmalar -->
+    <div class="small-buttons-row">
+      <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> Asosiy sahifa</a>
+      <button class="btn back-btn" id="aboutBtn"><i class="fa-solid fa-user"></i> Men haqimda</button>
+    </div>
   </div>
 </div>
 
@@ -245,6 +262,13 @@ copyBtns.forEach(btn => {
       toast._t = setTimeout(()=> toast.style.display='none',2000);
     }
   });
+});
+
+// Men haqimda tugmasi
+const aboutBtn = document.getElementById('aboutBtn');
+aboutBtn.addEventListener('click', () => {
+  mainScreen.style.display = 'none';
+  introScreen.style.display = 'flex';
 });
 </script>
 
