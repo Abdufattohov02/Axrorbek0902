@@ -3,262 +3,273 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Akhrorbek Abdufattokhov</title>
-<!-- Font Awesome for logos -->
+<title>Ahrorbek Abdufattokhov</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-  :root {
-    --bg1: #ff9a9e;
-    --bg2: #fad0c4;
-    --card: #ffffffcc;
-    --accent: #28a745;
-  }
+:root {
+  --bg1: #ff9a9e;
+  --bg2: #fad0c4;
+  --card: #ffffffcc;
+}
 
-  *{box-sizing:border-box;}
+*{box-sizing:border-box;}
 
-  body{
-    margin:0;
-    font-family:'Poppins',sans-serif;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:16px;
-    background:linear-gradient(135deg,var(--bg1),var(--bg2));
-  }
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+}
 
-  .card{
-    width:90%;
-    max-width:400px;
-    background:var(--card);
-    padding:28px;
-    border-radius:16px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.15);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:14px;
-    position:relative;
-  }
+.card{
+  width:90%;
+  max-width:450px;
+  background:var(--card);
+  padding:28px;
+  border-radius:16px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.15);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
 
-  h1{margin:0;font-size:1.4rem;text-align:center;}
-  p{margin:0;text-align:center;color:#333;}
+h1{margin:0;font-size:1.5rem;text-align:center;}
+p{margin:0;text-align:center;color:#333;line-height:1.5;}
 
-  .buttons{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:6px;}
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    padding:12px 14px;
-    border-radius:10px;
-    text-decoration:none;
-    color:#fff;
-    font-weight:600;
-    cursor:pointer;
-    border:none;
-    width:100%;
-    min-height:44px;
-    font-size:1rem;
-    transition:all 0.2s ease;
-  }
+.buttons{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:10px;}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:12px 14px;
+  border-radius:10px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  border:none;
+  width:100%;
+  min-height:44px;
+  font-size:1rem;
+  transition:transform .15s, opacity .15s;
+}
 
-  .telegram{background:#0088cc;}
-  .instagram{background:#e1306c;}
-  .facebook{background:#1877f2;}
-  .tiktok{background:#010101;}
-  .phone{background:#28a745;}
-  .back-btn{background:#6c757d;color:#fff;margin-top:8px;}
+.telegram{background:#0088cc;}
+.instagram{background:#e1306c;}
+.facebook{background:#1877f2;}
+.tiktok{background:#010101;}
+.phone{background:#28a745;}
+.back-btn{background:#6c757d;color:#fff;margin-top:8px;}
 
-  .buttons a:hover, .btn:hover{
-    opacity:0.85;
-    transform:translateY(-2px);
-  }
+.btn:hover{opacity:0.85;transform:translateY(-2px);}
+.btn i {font-size:1.2em;}
 
-  .phone-choices{position:relative;width:100%;}
-  .choices-panel{
-    position:absolute;
-    top:-170px;
-    left:50%;
-    transform:translateX(-50%);
-    width:100%;
-    background:#fff;
-    border-radius:12px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.15);
-    padding:10px;
-    display:none;
-    z-index:50;
-    flex-direction:column;
-    gap:8px;
-  }
+/* Phone panel */
+.choices-panel{
+  display:none;
+  flex-direction:column;
+  gap:8px;
+  position:absolute;
+  bottom:calc(100% + 10px);
+  left:0;
+  width:100%;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+  padding:10px;
+  z-index:50;
+}
 
-  .choice{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px;
-    padding:10px;
-    border-radius:8px;
-    transition:background .15s;
-  }
-  .choice:hover{background:#f2f2f2;}
-  .number{font-weight:600;color:#111;}
-  .choice-actions{display:flex;gap:8px;flex:1;justify-content:space-around;}
-  .small-btn{
-    padding:8px 10px;
-    border-radius:8px;
-    border:none;
-    cursor:pointer;
-    font-weight:600;
-    flex:1;
-    text-align:center;
-  }
-  .call-btn{background:#0069d9;color:#fff;}
-  .copy-btn{background:#28a745;color:#fff;}
+.choice{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:10px;
+  border-radius:8px;
+  transition:background .15s;
+}
+.choice:hover{background:#f2f2f2;}
+.number{font-weight:600;color:#111;}
+.choice-actions{display:flex;gap:8px;flex:1;justify-content:space-around;}
+.small-btn{
+  padding:8px 10px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  flex:1;
+  text-align:center;
+}
+.call-btn{background:#0069d9;color:#fff;}
+.copy-btn{background:#28a745;color:#fff;}
 
-  .toast{
-    position:fixed;
-    top:24px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#222;
-    color:#fff;
-    padding:10px 14px;
-    border-radius:10px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.25);
-    display:none;
-    z-index:100;
-    font-weight:600;
-  }
+.toast{
+  position:fixed;
+  top:24px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#222;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:10px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.25);
+  display:none;
+  z-index:100;
+  font-weight:600;
+}
 
-  @media (max-width:420px){
-    .card{padding:20px;}
-    h1{font-size:1.2rem;}
-    p{font-size:0.95rem;}
-    .btn{padding:10px;font-size:0.95rem;}
-    .choices-panel{top:-200px;}
-  }
+.phone-choices{position:relative;}
+
+/* small buttons row */
+.small-buttons-row{
+  display:flex;
+  gap:10px;
+  width:100%;
+}
+.small-buttons-row .btn{
+  flex:1;
+  padding:10px 0;
+  font-size:0.9rem;
+}
+
+@media (max-width:420px){
+  .card{padding:20px;}
+  h1{font-size:1.2rem;}
+  p{font-size:0.95rem;}
+  .btn{padding:10px;font-size:0.95rem;}
+}
 </style>
 </head>
 <body>
 
-<div class="card" id="mainCard">
-  <h1>Hello! You can contact me through this convenient app</h1>
-  <p id="phoneIntro" style="display:none;">You can select one of my phone numbers below to call or copy it.</p>
+<!-- Introduction Screen -->
+<div id="introScreen" class="card">
+  <h1>About Me</h1>
+  <p>
+    I am <strong>Ahrorbek Abdufattokhov</strong>, born on September 10, 2002 in Izboskan district, Andijon region.
+    I entered the 32nd General Secondary School in 2009 and graduated in 2020. In the same year,
+    I joined the Kokon Publishing and Information Technology Technical School in the <strong>Computer Engineering</strong> program.
+  </p>
+  <p>
+    After completing the technical school in 2022, I was admitted to Andijon State University as a 2nd-year student
+    in <strong>Computer Engineering</strong> and graduated in 2025. Currently, I am pursuing a master's degree at
+    <strong>Wonkwang University</strong> in Iksan, South Korea.
+  </p>
 
   <div class="buttons">
-    <!-- Social buttons with icons -->
-    <a class="btn telegram" href="https://t.me/Abdufattohov02" target="_blank">
-      <i class="fab fa-telegram-plane"></i> Telegram
-    </a>
-    <a class="btn instagram" href="https://instagram.com/Abdufattohov02" target="_blank">
-      <i class="fab fa-instagram"></i> Instagram
-    </a>
-    <a class="btn facebook" href="https://facebook.com/Abdufattohov02" target="_blank">
-      <i class="fab fa-facebook-f"></i> Facebook
-    </a>
-    <a class="btn tiktok" href="https://www.tiktok.com/@Abdufattohov02" target="_blank">
-      <i class="fab fa-tiktok"></i> TikTok
-    </a>
+    <button class="btn phone" id="enterBtn"><i class="fa-solid fa-arrow-right"></i> Connect</button>
+    <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> Main Page</a>
+  </div>
+</div>
 
-    <!-- Phone numbers -->
+<!-- Connection Screen -->
+<div id="mainScreen" class="card" style="display:none;">
+  <h1>Hello! You can contact me via the buttons below.</h1>
+
+  <div class="buttons">
+    <a class="btn telegram" href="https://t.me/Abdufattohov02" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a>
+    <a class="btn instagram" href="https://instagram.com/Abdufattohov02" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+    <a class="btn facebook" href="https://facebook.com/Abdufattohov02" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a>
+    <a class="btn tiktok" href="https://www.tiktok.com/@" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+
     <div class="phone-choices">
-      <button class="btn phone" id="phoneToggle"><i class="fas fa-phone"></i> Phone Numbers</button>
+      <button class="btn phone" id="phoneToggle"><i class="fa-solid fa-phone"></i> Phone Numbers</button>
 
-      <div class="choices-panel" id="choicesPanel" aria-hidden="true">
+      <div class="choices-panel" id="choicesPanel">
         <div class="choice">
           <div class="number">+998 97 852 2002</div>
           <div class="choice-actions">
-            <a class="small-btn call-btn" href="tel:+998978522002"><i class="fas fa-phone"></i> Call</a>
-            <button class="small-btn copy-btn" data-number="+998978522002"><i class="fas fa-copy"></i> Copy</button>
+            <a class="small-btn call-btn" href="tel:+998978522002">Call</a>
+            <button class="small-btn copy-btn" data-number="+998978522002">Copy</button>
           </div>
         </div>
         <div class="choice">
           <div class="number">+82 010 7492 5223</div>
           <div class="choice-actions">
-            <a class="small-btn call-btn" href="tel:+8201074925223"><i class="fas fa-phone"></i> Call</a>
-            <button class="small-btn copy-btn" data-number="+8201074925223"><i class="fas fa-copy"></i> Copy</button>
+            <a class="small-btn call-btn" href="tel:+8201074925223">Call</a>
+            <button class="small-btn copy-btn" data-number="+8201074925223">Copy</button>
           </div>
         </div>
-        <!-- Back button inside phone panel -->
-        <a class="btn back-btn" href="uz.html"><i class="fas fa-arrow-left"></i> Back</a>
+        <a class="btn back-btn" id="phoneBackBtn"><i class="fa-solid fa-arrow-left"></i> Back</a>
       </div>
     </div>
 
-    <!-- Main page back button -->
-    <a class="btn back-btn" href="index.html"><i class="fas fa-home"></i> Back to Main Page</a>
-
+    <!-- small buttons row -->
+    <div class="small-buttons-row">
+      <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> Main Page</a>
+      <button class="btn back-btn" id="aboutBtn"><i class="fa-solid fa-user"></i> About Me</button>
+    </div>
   </div>
 </div>
 
 <div class="toast" id="toast">Phone number copied!</div>
 
 <script>
-  const phoneToggle = document.getElementById('phoneToggle');
-  const choicesPanel = document.getElementById('choicesPanel');
-  const toast = document.getElementById('toast');
-  const phoneIntro = document.getElementById('phoneIntro');
+const enterBtn = document.getElementById('enterBtn');
+const introScreen = document.getElementById('introScreen');
+const mainScreen = document.getElementById('mainScreen');
 
-  // Toggle phone panel
-  phoneToggle.addEventListener('click', () => {
-    const isOpen = choicesPanel.style.display === 'flex';
-    choicesPanel.style.display = isOpen ? 'none' : 'flex';
-    choicesPanel.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
-    phoneIntro.style.display = isOpen ? 'none' : 'block';
-  });
+enterBtn.addEventListener('click', () => {
+  introScreen.style.display = 'none';
+  mainScreen.style.display = 'flex';
+});
 
-  // Close panel when clicking outside
-  document.addEventListener('click', (e) => {
-    const inside = e.composedPath().includes(choicesPanel) || e.composedPath().includes(phoneToggle);
-    if (!inside) {
+const phoneToggle = document.getElementById('phoneToggle');
+const choicesPanel = document.getElementById('choicesPanel');
+const phoneBackBtn = document.getElementById('phoneBackBtn');
+const toast = document.getElementById('toast');
+
+phoneToggle.addEventListener('click', () => {
+  choicesPanel.style.display = choicesPanel.style.display === 'flex' ? 'none' : 'flex';
+});
+
+phoneBackBtn.addEventListener('click', () => {
+  choicesPanel.style.display = 'none';
+});
+
+document.addEventListener('click', (e) => {
+  const inside = e.composedPath().includes(choicesPanel) || e.composedPath().includes(phoneToggle);
+  if (!inside) choicesPanel.style.display = 'none';
+});
+
+const copyBtns = document.querySelectorAll('.copy-btn');
+copyBtns.forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const num = btn.getAttribute('data-number');
+    try {
+      await navigator.clipboard.writeText(num);
+      toast.textContent = 'Phone number copied!';
+      toast.style.display = 'block';
+      clearTimeout(toast._t);
+      toast._t = setTimeout(()=> toast.style.display='none',2000);
       choicesPanel.style.display = 'none';
-      phoneIntro.style.display = 'none';
-      choicesPanel.setAttribute('aria-hidden', 'true');
+    } catch {
+      toast.textContent = 'Copy failed';
+      toast.style.display = 'block';
+      clearTimeout(toast._t);
+      toast._t = setTimeout(()=> toast.style.display='none',2000);
     }
   });
+});
 
-  // Copy phone number
-  const copyBtns = document.querySelectorAll('.copy-btn');
-  copyBtns.forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const num = btn.getAttribute('data-number');
-      try {
-        await navigator.clipboard.writeText(num);
-        showToast('Phone number copied!');
-        choicesPanel.style.display = 'none';
-        phoneIntro.style.display = 'none';
-      } catch (err) {
-        showToast('Error copying number');
-      }
-    });
-  });
-
-  function showToast(msg){
-    toast.textContent = msg;
-    toast.style.display = 'block';
-    clearTimeout(showToast._t);
-    showToast._t = setTimeout(()=>{ toast.style.display = 'none'; },2000);
-  }
-
-  // Social buttons confirmation
-  const socialButtons = document.querySelectorAll('.btn.telegram, .btn.instagram, .btn.facebook, .btn.tiktok');
-  socialButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const platform = btn.textContent.trim();
-      const url = btn.getAttribute('href');
-      const confirmLink = confirm(`Do you want to go to ${platform}?`);
-      if(confirmLink){
-        window.open(url, '_blank');
-      }
-    });
-  });
+// About Me button
+const aboutBtn = document.getElementById('aboutBtn');
+aboutBtn.addEventListener('click', () => {
+  mainScreen.style.display = 'none';
+  introScreen.style.display = 'flex';
+});
 </script>
 
 </body>
 </html>
-
-
