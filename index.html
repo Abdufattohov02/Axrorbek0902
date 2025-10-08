@@ -29,12 +29,12 @@ body, html {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   opacity: 1;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease;
   width: 100%;
   z-index: 2;
 }
 
-/* Fon rasm (loga.jpg) */
+/* Fon salomlashuv uchun */
 #welcome-bg {
   position: fixed;
   top: 0;
@@ -61,7 +61,7 @@ body, html {
   flex-direction: column;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease;
   z-index: 3;
   position: relative;
 }
@@ -130,7 +130,7 @@ a:hover { transform: scale(1.05); opacity: 0.9; }
   animation: gradientMove 15s ease infinite;
   z-index:0;
   opacity:0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease;
 }
 
 #lang-bg.show {
@@ -153,7 +153,7 @@ a:hover { transform: scale(1.05); opacity: 0.9; }
 </head>
 <body>
 
-<!-- Orqa fon rasm -->
+<!-- Salomlashuv fon -->
 <div id="welcome-bg"></div>
 
 <!-- Gradient fon til tanlash uchun -->
@@ -194,24 +194,22 @@ function showLangCard() {
   if(animationDone) return;
   animationDone = true;
   welcome.style.display = 'none';
-  // Orqa fon rasm doim ko‘rinadi
+  welcomeBg.style.display = 'none';
   langBg.classList.add('show');
   langCard.classList.add('show');
 }
 
-// Salomlashuv matni tezroq o‘zgaradi
 setTimeout(() => {
   welcome.style.opacity = 0;
   setTimeout(() => {
     welcome.innerHTML = "Xush kelibsiz<br>환영합니다<br>Welcome";
     welcome.style.opacity = 1;
-  }, 200); // 0.2s
-}, 1000); // 1s
+  }, 300);
+}, 1900);
 
-// Til tanlash kartasi tezroq chiqadi
 setTimeout(() => {
   showLangCard();
-}, 1800); // 1.8s
+}, 4100);
 
 document.body.addEventListener('click', showLangCard);
 document.body.addEventListener('touchstart', showLangCard);
