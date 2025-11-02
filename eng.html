@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Ahrorbek Abdufattokhov</title>
+<title>Ahrorbek Abdufattohov</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -68,13 +68,14 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 .instagram{background:#e1306c;}
 .facebook{background:#1877f2;}
 .tiktok{background:#010101;}
+.gmail{background:#d44638;}
 .phone{background:#28a745;}
 .back-btn{background:#6c757d;color:#fff;margin-top:8px;}
 
 .btn:hover{opacity:0.85;transform:translateY(-2px);}
 .btn i {font-size:1.2em;}
 
-/* Phone panel */
+/* Telefon raqam paneli */
 .choices-panel{
   display:none;
   flex-direction:column;
@@ -131,7 +132,7 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 
 .phone-choices{position:relative;}
 
-/* small buttons row */
+/* Ikki kichik tugma bitta qatorda */
 .small-buttons-row{
   display:flex;
   gap:10px;
@@ -153,35 +154,35 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 </head>
 <body>
 
-<!-- Introduction Screen -->
+<!-- About Me Screen -->
 <div id="introScreen" class="card">
   <h1>About Me</h1>
   <p>
-    I am <strong>Ahrorbek Abdufattokhov</strong>, born on September 10, 2002 in Izboskan district, Andijon region.
-    I entered the 32nd General Secondary School in 2009 and graduated in 2020. In the same year,
-    I joined the Kokon Publishing and Information Technology Technical School in the <strong>Computer Engineering</strong> program.
+    My name is <strong>Akhrorbek Abdufattokhov</strong>. I was born on September 10, 2002, in Izboskan district, Andijan region, Uzbekistan. 
+    In 2009, I started my education at the 32nd General Secondary School and successfully completed it in 2020. That same year, 
+    I enrolled in the Fumigation and Information Technology College in Kokand, majoring in <strong>Computer Engineering</strong>.
   </p>
   <p>
-    After completing the technical school in 2022, I was admitted to Andijon State University as a 2nd-year student
-    in <strong>Computer Engineering</strong> and graduated in 2025. Currently, I am pursuing a master's degree at
-    <strong>Wonkwang University</strong> in Iksan, South Korea.
+    After graduating from the college in 2022, I was admitted to the master's program in <strong>Computer Engineering</strong> at Andijan State University and successfully completed it in 2025. 
+    Currently, I am pursuing my master's degree at <strong>Wonkwang University</strong> in Iksan, Republic of Korea.
   </p>
 
   <div class="buttons">
-    <button class="btn phone" id="enterBtn"><i class="fa-solid fa-arrow-right"></i> Connect</button>
-    <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> Main Page</a>
+    <button class="btn phone" id="enterBtn"><i class="fa-solid fa-arrow-right"></i> Contact Me</button>
+    <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
   </div>
 </div>
 
-<!-- Connection Screen -->
+<!-- Contact Section (social + phone) -->
 <div id="mainScreen" class="card" style="display:none;">
-  <h1>You can contact me via the buttons below.</h1>
+  <h1>You can reach me via the following apps</h1>
 
   <div class="buttons">
     <a class="btn telegram" href="https://t.me/Abdufattohov02" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a>
     <a class="btn instagram" href="https://instagram.com/Abdufattohov02" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
     <a class="btn facebook" href="https://facebook.com/Abdufattohov02" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a>
     <a class="btn tiktok" href="https://www.tiktok.com/@Abdufattohov02" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+    <a class="btn gmail" href="mailto:Axrorbek0902@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i> Gmail</a>
 
     <div class="phone-choices">
       <button class="btn phone" id="phoneToggle"><i class="fa-solid fa-phone"></i> Phone Numbers</button>
@@ -205,9 +206,8 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
       </div>
     </div>
 
-    <!-- small buttons row -->
     <div class="small-buttons-row">
-      <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> Main Page</a>
+      <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
       <button class="btn back-btn" id="aboutBtn"><i class="fa-solid fa-user"></i> About Me</button>
     </div>
   </div>
@@ -255,7 +255,7 @@ copyBtns.forEach(btn => {
       toast._t = setTimeout(()=> toast.style.display='none',2000);
       choicesPanel.style.display = 'none';
     } catch {
-      toast.textContent = 'Copy failed';
+      toast.textContent = 'Failed to copy';
       toast.style.display = 'block';
       clearTimeout(toast._t);
       toast._t = setTimeout(()=> toast.style.display='none',2000);
@@ -263,7 +263,6 @@ copyBtns.forEach(btn => {
   });
 });
 
-// About Me button
 const aboutBtn = document.getElementById('aboutBtn');
 aboutBtn.addEventListener('click', () => {
   mainScreen.style.display = 'none';
@@ -273,5 +272,3 @@ aboutBtn.addEventListener('click', () => {
 
 </body>
 </html>
-
-
