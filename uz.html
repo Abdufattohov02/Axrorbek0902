@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Akhrorbek Abdufattokhov</title>
+<title>Ahrorbek Abdufattohov</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -68,9 +68,9 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 .instagram{background:#e1306c;}
 .facebook{background:#1877f2;}
 .tiktok{background:#010101;}
+.gmail{background:#d44638;}
 .phone{background:#28a745;}
 .back-btn{background:#6c757d;color:#fff;margin-top:8px;}
-.gmail{background:#D44638;} /* Gmail qizil rangi */
 
 .btn:hover{opacity:0.85;transform:translateY(-2px);}
 .btn i {font-size:1.2em;}
@@ -158,16 +158,14 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 <div id="introScreen" class="card">
   <h1>O'zim haqimda qisqacha</h1>
   <p>
-    <p>
-Men <strong>Ahrorbek Abdufattohov</strong>, 2002-yil 10-sentabrda Andijon viloyati, Izboskan tumanida tug‘ildim. 2009-yilda 32-umumiy o‘rta ta’lim maktabiga qadam qo‘ydim va 2020-yilda uni muvaffaqiyatli tamomladim. Shu yili Qo‘qon Noshirlik va Axborot Texnologiyalari Texnikumiga <strong>Kompyuter Injiniringi</strong> yo‘nalishida o‘qishga kirganman.
-</p>
-<p>
-2022-yilda texnikumni tugatgach, Andijon Davlat Universitetining <strong>Kompyuter Injiniringi</strong> yo‘nalishida magistratura bosqichiga qabul qilindim va 2025-yilda universitetni muvaffaqiyatli yakunladim. Hozirda Koreya Respublikasi, Iksan shahridagi <strong>Wonkwang Universiteti</strong>da magistratura bosqichida tahsil olmoqdaman.
-</p>
-<p>
-Texnologiyalar, kompyuter injiniringi va innovatsion yechimlarga qiziqaman. Maqsadim – o‘z bilim va ko‘nikmalarim orqali sohamni rivojlantirish va amaliy loyihalarda faol ishtirok etish.
-</p>
-
+    Men <strong>Ahrorbek Abdufattohov</strong>, 2002-yil 10-sentabrda Andijon viloyati, Izboskan tumanida tug‘ildim. 
+    2009-yilda 32-umumiy o‘rta ta’lim maktabiga qadam qo‘ydim va 2020-yilda uni muvaffaqiyatli tamomladim. Shu yili 
+    Qo‘qon Noshirlik va Axborot Texnologiyalari Texnikumiga <strong>Kompyuter Injiniringi</strong> yo‘nalishida o‘qishga kirganman.
+  </p>
+  <p>
+    2022-yilda texnikumni tugatgach, Andijon Davlat Universitetining <strong>Kompyuter Injiniringi</strong> yo‘nalishida magistratura bosqichiga qabul qilindim 
+    va 2025-yilda universitetni muvaffaqiyatli yakunladim. Hozirda Koreya Respublikasi, Iksan shahridagi <strong>Wonkwang Universiteti</strong>da magistratura bosqichida tahsil olmoqdaman.
+  </p>
 
   <div class="buttons">
     <button class="btn phone" id="enterBtn"><i class="fa-solid fa-arrow-right"></i> Bog'lanish</button>
@@ -204,12 +202,10 @@ Texnologiyalar, kompyuter injiniringi va innovatsion yechimlarga qiziqaman. Maqs
             <button class="small-btn copy-btn" data-number="+8201074925223">Copy</button>
           </div>
         </div>
-        <!-- Ortga tugma bog'lanish bo'limiga -->
         <a class="btn back-btn" id="phoneBackBtn"><i class="fa-solid fa-arrow-left"></i> Ortga</a>
       </div>
     </div>
 
-    <!-- Katta tugmalardan kichik bitta qator tugmalar -->
     <div class="small-buttons-row">
       <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> Asosiy sahifa</a>
       <button class="btn back-btn" id="aboutBtn"><i class="fa-solid fa-user"></i> Men haqimda</button>
@@ -267,7 +263,6 @@ copyBtns.forEach(btn => {
   });
 });
 
-// Men haqimda tugmasi
 const aboutBtn = document.getElementById('aboutBtn');
 aboutBtn.addEventListener('click', () => {
   mainScreen.style.display = 'none';
