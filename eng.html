@@ -75,7 +75,6 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 .btn:hover{opacity:0.85;transform:translateY(-2px);}
 .btn i {font-size:1.2em;}
 
-/* Telefon raqam paneli */
 .choices-panel{
   display:none;
   flex-direction:column;
@@ -132,7 +131,6 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 
 .phone-choices{position:relative;}
 
-/* Ikki kichik tugma bitta qatorda */
 .small-buttons-row{
   display:flex;
   gap:10px;
@@ -156,26 +154,27 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 
 <!-- About Me Screen -->
 <div id="introScreen" class="card">
-  <h1>About Me</h1>
+  <h1>Brief About Me</h1>
   <p>
-    My name is <strong>Akhrorbek Abdufattokhov</strong>. I was born on September 10, 2002, in Izboskan district, Andijan region, Uzbekistan. 
-    In 2009, I started my education at the 32nd General Secondary School and successfully completed it in 2020. That same year, 
-    I enrolled in the Fumigation and Information Technology College in Kokand, majoring in <strong>Computer Engineering</strong>.
+    My name is <strong>Ahrorbek Abdufattohov</strong>. I was born on September 10, 2002, in Izboskan district, Andijan region. 
+    In 2009, I entered School No. 32 and successfully graduated in 2020. In the same year, I was admitted to 
+    the Kokand Publishing and Information Technologies Technical College, majoring in <strong>Computer Engineering</strong>.
   </p>
-  <p>0
-   After graduating from college in 2022, I was admitted to the Bachelor’s program in Computer Engineering at Andijan State University and successfully completed it in 2025.
-Currently, I am pursuing my master's degree at Wonkwang University in Iksan, Republic of Korea.
-    p>
+  <p>
+    After completing my technical education in 2022, I continued my bachelor's studies in <strong>Computer Engineering</strong> at
+    Andijan State University and successfully graduated in 2025. I am currently pursuing my master's degree at 
+    <strong>Wonkwang University</strong> located in Iksan, Republic of Korea.
+  </p>
 
   <div class="buttons">
-    <button class="btn phone" id="enterBtn"><i class="fa-solid fa-arrow-right"></i> Contact Me</button>
-    <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+    <button class="btn phone" id="enterBtn"><i class="fa-solid fa-arrow-right"></i> Contact</button>
+    <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> Home Page</a>
   </div>
 </div>
 
-<!-- Contact Section (social + phone) -->
+<!-- Contact Screen -->
 <div id="mainScreen" class="card" style="display:none;">
-  <h1>You can reach me via the following apps</h1>
+  <h1>You can contact me through any application convenient for you</h1>
 
   <div class="buttons">
     <a class="btn telegram" href="https://t.me/Abdufattohov02" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a>
@@ -255,7 +254,7 @@ copyBtns.forEach(btn => {
       toast._t = setTimeout(()=> toast.style.display='none',2000);
       choicesPanel.style.display = 'none';
     } catch {
-      toast.textContent = 'Failed to copy';
+      toast.textContent = 'Failed to copy the number';
       toast.style.display = 'block';
       clearTimeout(toast._t);
       toast._t = setTimeout(()=> toast.style.display='none',2000);
@@ -272,4 +271,3 @@ aboutBtn.addEventListener('click', () => {
 
 </body>
 </html>
-
