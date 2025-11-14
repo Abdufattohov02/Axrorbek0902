@@ -3,21 +3,19 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>아흐로르벡 압두파트토프</title>
+<title>Ahrorbek Abdufattohov</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+/* --- stylelar o'zgarmagan --- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
 :root {
   --bg1: #ff9a9e;
   --bg2: #fad0c4;
   --card: #ffffffcc;
 }
-
 *{box-sizing:border-box;}
-
 body{
   margin:0;
   font-family:'Poppins',sans-serif;
@@ -28,7 +26,6 @@ body{
   padding:16px;
   background:linear-gradient(135deg,var(--bg1),var(--bg2));
 }
-
 .card{
   width:90%;
   max-width:450px;
@@ -41,10 +38,8 @@ body{
   align-items:center;
   gap:14px;
 }
-
 h1{margin:0;font-size:1.5rem;text-align:center;}
 p{margin:0;text-align:center;color:#333;line-height:1.5;}
-
 .buttons{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:10px;}
 .btn{
   display:inline-flex;
@@ -63,7 +58,6 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
   font-size:1rem;
   transition:transform .15s, opacity .15s;
 }
-
 .telegram{background:#0088cc;}
 .instagram{background:#e1306c;}
 .facebook{background:#1877f2;}
@@ -71,11 +65,8 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 .gmail{background:#d44638;}
 .phone{background:#28a745;}
 .back-btn{background:#6c757d;color:#fff;margin-top:8px;}
-
 .btn:hover{opacity:0.85;transform:translateY(-2px);}
 .btn i {font-size:1.2em;}
-
-/* 전화번호 패널 */
 .choices-panel{
   display:none;
   flex-direction:column;
@@ -90,7 +81,6 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
   padding:10px;
   z-index:50;
 }
-
 .choice{
   display:flex;
   align-items:center;
@@ -114,7 +104,6 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 }
 .call-btn{background:#0069d9;color:#fff;}
 .copy-btn{background:#28a745;color:#fff;}
-
 .toast{
   position:fixed;
   top:24px;
@@ -129,10 +118,7 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
   z-index:100;
   font-weight:600;
 }
-
 .phone-choices{position:relative;}
-
-/* 두 개 작은 버튼 한 줄에 */
 .small-buttons-row{
   display:flex;
   gap:10px;
@@ -143,7 +129,6 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
   padding:10px 0;
   font-size:0.9rem;
 }
-
 @media (max-width:420px){
   .card{padding:20px;}
   h1{font-size:1.2rem;}
@@ -154,35 +139,36 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 </head>
 <body>
 
-<!-- 자기소개 화면 -->
+<!-- 소개 화면 -->
 <div id="introScreen" class="card">
-  <h1>자기소개</h1>
+  <h1>간단한 자기소개</h1>
   <p>
-    제 이름은 <strong>아흐로르벡 압두파트토프</strong>입니다. 저는 2002년 9월 10일 우즈베키스탄 안디잔 주 이즈보스칸 지역에서 태어났습니다. 
-    2009년에 제32공립중학교에 입학하여 2020년에 성공적으로 졸업했습니다. 같은 해, 코칸드의 농업 및 정보기술 전문학교에 
-    <strong>컴퓨터 공학</strong> 전공으로 입학했습니다.
+    저는 <strong>Ahrorbek Abdufattohov</strong>이며, 2002년 9월 10일 우즈베키스탄 안디잔 주 이즈보스칸 지역에서 태어났습니다.
+    2009년에 32번 일반 중등학교에 입학하여 2020년에 성공적으로 졸업했습니다. 같은 해에  
+    Kokand 출판 및 정보 기술 기술학교에서 <strong>컴퓨터 공학</strong> 전공으로 입학하였습니다.
   </p>
   <p>
-    2022년에 전문학교를 졸업한 후, 안디잔 국립대학교 <strong>컴퓨터 공학</strong> 석사 과정에 입학하여 2025년에 성공적으로 졸업했습니다. 
-    현재 저는 대한민국 익산에 있는 <strong>원광대학교</strong>에서 석사 과정을 공부하고 있습니다.
+    2022년에 기술학교를 졸업한 후 안디잔 국립대학교 <strong>컴퓨터 공학</strong> 학사 과정에 입학하여  
+    2025년에 성공적으로 졸업했습니다. 현재는 대한민국 익산시에 위치한  
+    <strong>원광대학교</strong>에서 석사 과정을 밟고 있습니다.
   </p>
 
   <div class="buttons">
     <button class="btn phone" id="enterBtn"><i class="fa-solid fa-arrow-right"></i> 연락하기</button>
-    <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> 홈</a>
+    <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> 메인 페이지</a>
   </div>
 </div>
 
-<!-- 연락처 화면 (소셜 + 전화번호) -->
+<!-- 연락처 화면 -->
 <div id="mainScreen" class="card" style="display:none;">
-  <h1>다음 앱을 통해 저에게 연락할 수 있습니다</h1>
+  <h1>원하시는 앱을 통해 저와 연락하실 수 있습니다</h1>
 
   <div class="buttons">
     <a class="btn telegram" href="https://t.me/Abdufattohov02" target="_blank"><i class="fa-brands fa-telegram"></i> 텔레그램</a>
     <a class="btn instagram" href="https://instagram.com/Abdufattohov02" target="_blank"><i class="fa-brands fa-instagram"></i> 인스타그램</a>
     <a class="btn facebook" href="https://facebook.com/Abdufattohov02" target="_blank"><i class="fa-brands fa-facebook"></i> 페이스북</a>
     <a class="btn tiktok" href="https://www.tiktok.com/@Abdufattohov02" target="_blank"><i class="fa-brands fa-tiktok"></i> 틱톡</a>
-    <a class="btn gmail" href="mailto:Axrorbek0902@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i> 지메일</a>
+    <a class="btn gmail" href="mailto:Axrorbek0902@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i> 이메일</a>
 
     <div class="phone-choices">
       <button class="btn phone" id="phoneToggle"><i class="fa-solid fa-phone"></i> 전화번호</button>
@@ -191,24 +177,24 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
         <div class="choice">
           <div class="number">+998 97 852 2002</div>
           <div class="choice-actions">
-            <a class="small-btn call-btn" href="tel:+998978522002">전화 걸기</a>
+            <a class="small-btn call-btn" href="tel:+998978522002">전화</a>
             <button class="small-btn copy-btn" data-number="+998978522002">복사</button>
           </div>
         </div>
         <div class="choice">
           <div class="number">+82 010 7492 5223</div>
           <div class="choice-actions">
-            <a class="small-btn call-btn" href="tel:+8201074925223">전화 걸기</a>
+            <a class="small-btn call-btn" href="tel:+8201074925223">전화</a>
             <button class="small-btn copy-btn" data-number="+8201074925223">복사</button>
           </div>
         </div>
-        <a class="btn back-btn" id="phoneBackBtn"><i class="fa-solid fa-arrow-left"></i> 뒤로</a>
+        <a class="btn back-btn" id="phoneBackBtn"><i class="fa-solid fa-arrow-left"></i> 뒤로가기</a>
       </div>
     </div>
 
     <div class="small-buttons-row">
-      <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> 홈</a>
-      <button class="btn back-btn" id="aboutBtn"><i class="fa-solid fa-user"></i> 자기소개</button>
+      <a class="btn back-btn" href="index.html"><i class="fa-solid fa-house"></i> 메인 페이지</a>
+      <button class="btn back-btn" id="aboutBtn"><i class="fa-solid fa-user"></i> 소개</button>
     </div>
   </div>
 </div>
@@ -216,6 +202,7 @@ p{margin:0;text-align:center;color:#333;line-height:1.5;}
 <div class="toast" id="toast">전화번호가 복사되었습니다!</div>
 
 <script>
+/* scriptlar o'zgarmagan, faqat alert matni o_translate */
 const enterBtn = document.getElementById('enterBtn');
 const introScreen = document.getElementById('introScreen');
 const mainScreen = document.getElementById('mainScreen');
@@ -255,7 +242,7 @@ copyBtns.forEach(btn => {
       toast._t = setTimeout(()=> toast.style.display='none',2000);
       choicesPanel.style.display = 'none';
     } catch {
-      toast.textContent = '복사 실패';
+      toast.textContent = '복사 중 오류가 발생했습니다!';
       toast.style.display = 'block';
       clearTimeout(toast._t);
       toast._t = setTimeout(()=> toast.style.display='none',2000);
