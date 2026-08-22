@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ahrorbek Abdufattohov</title>
+<meta name="description" content="Full-stack Dasturchi, Telegram Bot Mutaxassisi va Landshaft Dizayneri">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+    /* === ASOSIY SOZLAMALAR === */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+        --bg-dark: #030508;
+        --primary: #00f0ff;
+        --secondary: #b026ff;
+        --glass-bg: rgba(15, 20, 30, 0.4);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --text-main: #ffffff;
+        --text-muted: #8b949e;
+    }
+
+    body {
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        font-family: 'Outfit', sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    /* Zarrachalar (Fon) */
+    #particles-canvas {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    /* Asosiy Konteyner */
+    .container {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* Tepa qism (Navbar) */
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .logo {
+        font-family: 'Space Mono', monospace;
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    }
+
+    .lang-switcher { display: flex; gap: 5px; }
+    .lang-switcher button {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid var(--glass-border);
+        color: var(--text-muted);
+        padding: 0.5rem 0.8rem;
+        border-radius: 10px;
+        cursor: pointer;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.85rem;
+        transition: 0.3s;
+    }
+
+    .lang-switcher button:hover, .lang-switcher button.active {
+        background: var(--primary);
+        color: #000;
+        box-shadow: 0 0 15px var(--primary);
+    }
+
+    /* Grid Layout */
+    .grid-layout {
+        display: grid;
+        grid-template-columns: 380px 1fr;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    @media (max-width: 950px) {
+        .grid-layout { grid-template-columns: 1fr; }
+    }
+
+    /* Shaffof Panel (Glassmorphism) */
+    .glass-panel {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 2rem;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Chap qism: Profil va Aloqalar */
+    .profile-info { text-align: center; }
+
+    .avatar-container {
+        position: relative;
+        width: 150px; height: 150px;
+        margin: 0 auto 1.5rem;
+    }
+
+    .avatar-container img {
+        width: 100%; height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--primary);
+        box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+    }
+
+    .status-dot {
+        position: absolute; bottom: 8px; right: 12px;
+        width: 20px; height: 20px;
+        background-color: #00ff66;
+        border-radius: 50%;
+        border: 3px solid var(--bg-dark);
+        box-shadow: 0 0 15px #00ff66;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
+        70% { box-shadow: 0 0 0 15px rgba(0, 255, 102, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
+    }
+
+    .name { font-size: 1.8rem; font-weight: 900; margin-bottom: 0.5rem; }
+    .typewriter-text {
+        font-family: 'Space Mono', monospace;
+        color: var(--primary);
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+        min-height: 24px;
+    }
+
+    /* Ijtimoiy tarmoqlar Grid */
+    .section-label {
+        font-size: 0.8rem; color: var(--text-muted);
+        margin: 1.5rem 0 10px; text-transform: uppercase;
+        letter-spacing: 1px; text-align: left;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .social-btn {
+        display: flex; flex-direction: column; align-items: flex-start;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--glass-border);
+        padding: 0.7rem; border-radius: 12px;
+        color: var(--text-main); text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .social-btn:hover {
+        border-color: var(--primary);
+        transform: translateY(-3px);
+        background: rgba(0, 240, 255, 0.05);
+    }
+
+    .social-btn.full-width { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center;}
+    .soc-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 3px; display: flex; align-items: center; gap: 6px;}
+    .soc-sub { color: var(--text-muted); font-size: 0.75rem; font-family: 'Space Mono', monospace; word-break: break-all;}
+
+    /* O'ng qism: Kontent */
+    h2.section-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 1.4rem; color: var(--secondary);
+        margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;
+        text-shadow: 0 0 10px rgba(176, 38, 255, 0.3);
+    }
+
+    h2.section-title::before {
+        content: ''; display: block; width: 12px; height: 12px;
+        background: var(--primary); border-radius: 50%;
+        box-shadow: 0 0 10px var(--primary);
+    }
+
+    p.about-text {
+        color: var(--text-muted); line-height: 1.7;
+        font-size: 1rem; margin-bottom: 2rem;
+    }
+
+    /* Qiziqishlar / Jamoalar */
+    .tags-container {
+        display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem;
+    }
+    .tag {
+        background: rgba(112, 0, 255, 0.15); border: 1px solid rgba(112, 0, 255, 0.3);
+        padding: 0.4rem 0.8rem; border-radius: 30px; font-size: 0.85rem; font-weight: 500; color: #d8b4ff;
+    }
+
+    /* Xronologiya (Timeline) */
+    .timeline {
+        border-left: 2px solid rgba(0, 240, 255, 0.3);
+        padding-left: 1.5rem; margin-bottom: 2.5rem;
+    }
+    .tl-item { position: relative; margin-bottom: 1.5rem; }
+    .tl-item::before {
+        content: ''; position: absolute; left: -1.85rem; top: 5px;
+        width: 14px; height: 14px; background: var(--bg-dark);
+        border: 2px solid var(--primary); border-radius: 50%;
+        box-shadow: 0 0 10px var(--primary);
+    }
+    .tl-item.now::before { border-color: #00ff66; box-shadow: 0 0 12px #00ff66; }
+    .tl-year { font-family: 'Space Mono', monospace; color: var(--primary); font-size: 0.85rem; font-weight: 700; }
+    .tl-title { font-weight: 700; font-size: 1.05rem; margin: 0.3rem 0; color: var(--text-main); }
+    .tl-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+
+    /* =========================================
+       LOYIHALAR KARUSELI (ANIQ MARKAZDA)
+       ========================================= */
+    .carousel-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* HAR DOIM MARKAZDA */
+        justify-content: center;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px; /* Karta o'lchami o'rtacha va mukammal bo'lishi uchun */
+        min-height: 300px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .project-slide {
+        display: none;
+        width: 100%;
+        background: rgba(0,0,0,0.4); 
+        border: 1px solid var(--glass-border);
+        border-radius: 24px; 
+        padding: 3rem 2.5rem;
+        flex-direction: column;
+        align-items: center; 
+        text-align: center;  
+        animation: fadeIn 0.4s ease-out;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .project-slide.active {
+        display: flex;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px) scale(0.98); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .pj-icon { font-size: 3.5rem; margin-bottom: 1.2rem; }
+    
+    .pj-tags { 
+        display: flex; flex-wrap: wrap; gap: 8px; 
+        margin-bottom: 15px; justify-content: center; 
+    }
+    .pj-tag { 
+        font-size: 0.75rem; background: rgba(0,240,255,0.1); 
+        color: var(--primary); padding: 5px 12px; 
+        border-radius: 8px; border: 1px solid rgba(0,240,255,0.2); 
+        font-family: 'Space Mono', monospace;
+    }
+    
+    .pj-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main); }
+    .pj-desc { 
+        color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; 
+        margin-bottom: 2rem; 
+    }
+    
+    /* SAYTNI KO'RISH TUGMASI */
+    .pj-link {
+        display: inline-flex; justify-content: center; align-items: center;
+        font-family: 'Space Mono', monospace; font-size: 1rem;
+        color: #000; background: var(--primary); text-decoration: none; 
+        margin-top: auto; padding: 14px 35px; border-radius: 12px; font-weight: 700; 
+        transition: 0.3s; box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+    }
+    .pj-link:hover {
+        box-shadow: 0 8px 25px rgba(0, 240, 255, 0.6);
+        transform: translateY(-2px);
+    }
+
+    .pj-link.private-link {
+        background: rgba(255,255,255,0.05);
+        color: var(--text-muted);
+        border: 1px solid var(--glass-border);
+        box-shadow: none;
+    }
+    .pj-link.private-link:hover {
+        transform: none;
+        cursor: default;
+    }
+
+    /* Karusel boshqaruvi (Nuqtalar) */
+    .carousel-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 25px;
+    }
+    
+    .carousel-dot {
+        width: 12px; height: 12px;
+        background: var(--glass-border);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .carousel-dot.active {
+        background: var(--primary);
+        box-shadow: 0 0 12px var(--primary);
+        width: 35px;
+        border-radius: 6px;
+    }
+
+    /* Toast */
+    .toast {
+        position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(50px);
+        background: var(--primary); color: #000; padding: 10px 20px; border-radius: 30px;
+        font-weight: 700; font-size: 0.9rem; opacity: 0; transition: 0.3s; z-index: 1000;
+        box-shadow: 0 5px 15px rgba(0,240,255,0.4);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+</style>
+</head>
+<body>
+
+<!-- Cyber Zarrachalar -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Nusxa olinganlik xabari -->
+<div class="toast" id="toast">Nusxalandi!</div>
+
+<div class="container">
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">&lt;  AHRORBEK KARIMOVICH ABDUFATTOHOV&gt;</div>
+        <div class="lang-switcher">
+            <button class="active" onclick="switchLang('uz')">UZ</button>
+            <button onclick="switchLang('en')">EN</button>
+            <button onclick="switchLang('ru')">RU</button>
+            <button onclick="switchLang('kr')">KR</button>
+        </div>
+    </nav>
+
+    <!-- Asosiy Qism -->
+    <main class="grid-layout">
+        
+        <!-- Chap Qism: Profil & Aloqalar -->
+        <aside class="glass-panel profile-info">
+            <div class="avatar-container">
+               <img src="photo_2026-08-23_01-27-31.jpg" alt="Ahrorbek Abdufattohov" onerror="this.onerror=null; this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Ahrorbek&backgroundColor=030508'">                <div class="status-dot" title="Hozir onlayn / Open to work"></div>
+            </div>
+            
+            <h1 class="name">Ahrorbek Abdufattohov</h1>
+            <div class="typewriter-text" id="typewriter">Full-stack Dasturchi</div>
+            
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;" data-i18n="location">
+                📍 Andijon, O'zbekiston <br> 🇰🇷 Hozirda: Koreya (Magistratura)
+            </p>
+
+            <!-- Ijtimoiy tarmoqlar Grid -->
+            <div class="section-label" data-i18n="social_lbl">Ijtimoiy Tarmoqlar & Aloqa</div>
+            <div class="contact-grid">
+                <a href="https://t.me/Abdufattohov2002" target="_blank" class="social-btn">
+                    <div class="soc-title">✈️ Telegram</div>
+                    <div class="soc-sub">Abdufattohov2002</div>
+                </a>
+                <a href="https://www.instagram.com/abdufattohov2002" target="_blank" class="social-btn">
+                    <div class="soc-title">📸 Instagram</div>
+                    <div class="soc-sub">abdufattohov2002</div>
+                </a>
+                <a href="https://www.facebook.com/Abdufattohov2002" target="_blank" class="social-btn">
+                    <div class="soc-title">📘 Facebook</div>
+                    <div class="soc-sub">Abdufattohov2002</div>
+                </a>
+                <a href="https://www.tiktok.com/@abdufattohov2002" target="_blank" class="social-btn">
+                    <div class="soc-title">🎵 TikTok</div>
+                    <div class="soc-sub">abdufattohov2002</div>
+                </a>
+                <a href="https://www.threads.com/@abdufattohov2002" target="_blank" class="social-btn">
+                    <div class="soc-title">🧵 Threads</div>
+                    <div class="soc-sub">abdufattohov2002</div>
+                </a>
+                <a href="http://qr.kakao.com/talk/ZQvjzNXiN2VFD9bsovkZt64D9kA-" target="_blank" class="social-btn">
+                    <div class="soc-title">💬 KakaoTalk</div>
+                    <div class="soc-sub">Bog'lanish</div>
+                </a>
+                <a href="https://wa.me/8201080812002" target="_blank" class="social-btn full-width">
+                    <div class="soc-title">📞 WhatsApp</div>
+                    <div class="soc-sub">+82 010-8081-2002</div>
+                </a>
+                <a href="mailto:abdufattohov2002@gmail.com" class="social-btn full-width">
+                    <div class="soc-title">📧 Email</div>
+                    <div class="soc-sub">abdufattohov2002@gmail.com</div>
+                </a>
+                <a href="tel:+998978522002" class="social-btn">
+                    <div class="soc-title">🇺🇿 UZ Raqam</div>
+                    <div class="soc-sub">+998 97 852 2002</div>
+                </a>
+                <a href="tel:+8201080812002" class="social-btn">
+                    <div class="soc-title">🇰🇷 KR Raqam</div>
+                    <div class="soc-sub">+82 010-8081-2002</div>
+                </a>
+            </div>
+
+            <!-- O'yin Niklari -->
+            <div class="section-label" style="margin-top: 2rem;" data-i18n="games_lbl">O'yin Niklari (Nusxalash)</div>
+            <div class="contact-grid">
+                <div class="social-btn full-width" style="cursor: pointer;" onclick="copyText('ABDUFATTOHOV02')">
+                    <div class="soc-title">⚽ eFootball</div>
+                    <div class="soc-sub" style="color: var(--primary);">ABDUFATTOHOV02 📋</div>
+                </div>
+                <div class="social-btn full-width" style="cursor: pointer;" onclick="copyText('Abdufattohov02')">
+                    <div class="soc-title">🪂 PUBG Mobile</div>
+                    <div class="soc-sub" style="color: var(--primary);">Abdufattohov02 📋</div>
+                </div>
+            </div>
+
+            <!-- TASHRIF BUYURUVCHILAR HISOBLAGICHI -->
+            <div style="margin-top: 3rem; text-align: center; padding-top: 1.5rem; border-top: 1px solid var(--glass-border);">
+                <p style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;" data-i18n="visitors">Tashrif buyuruvchilar</p>
+                <img src="https://api.visitorbadge.io/api/visitors?path=abdufattohov02.github.io&label=SONI&labelColor=%23030508&countColor=%2300f0ff&style=flat" alt="Visitor Count" style="border-radius: 6px; box-shadow: 0 0 15px rgba(0,240,255,0.2);">
+            </div>
+        </aside>
+
+        <!-- O'ng Qism: Kontent -->
+        <section class="glass-panel">
+            <h2 class="section-title" data-i18n="ab_t">Men haqimda</h2>
+            <p class="about-text" data-i18n="ab_txt">
+                2002-yilda Andijon viloyati, Izboskan tumanida tug'ilganman. 2020-yilda maktabni, 2025-yilda esa universitetni muvaffaqiyatli tamomladim. Hozirda Koreyada landshaft dizayni yo'nalishi bo'yicha magistratura bosqichida tahsil olmoqdaman. Shu vaqtgacha bugalterlik, dasturlash, kompyuter ta'mirlash, video va rasm montaji sohalarida faoliyat yuritib kelganman. Futbol o'ynashni juda yaxshi ko'raman — ixlosmandligimga kelsak, Andijon va Barselona muxlisiman. Bo'sh vaqtimda esa eFootball Mobile va PUBG Mobile o'ynayman.
+            </p>
+
+            <div class="tags-container">
+                <span class="tag">Python / AI</span>
+                <span class="tag">React / Node.js</span>
+                <span class="tag">Telegram Bots</span>
+                <span class="tag">Andijon FC</span>
+                <span class="tag">FC Barcelona</span>
+            </div>
+
+            <h2 class="section-title" data-i18n="tl_t">Yillar bo'yicha Tajriba</h2>
+            <div class="timeline">
+                <div class="tl-item now">
+                    <div class="tl-year" data-i18n="tl_y6">Hozir</div>
+                    <div class="tl-title" data-i18n="tl_r6">Dasturchi + Landshaft dizayner</div>
+                    <div class="tl-desc" data-i18n="tl_dc6">Koreyada landshaft dizayni yo'nalishida magistratura bosqichida o'qimoqdaman. Bir vaqtning o'zida dasturlash loyihalari bilan ham shug'ullanmoqdaman.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-year">2025</div>
+                    <div class="tl-title" data-i18n="tl_r5">Oliy ta'lim bitiruvchisi 🎓</div>
+                    <div class="tl-desc" data-i18n="tl_dc5">Axborot texnologiyalari yo'nalishida Andijon Davlat Universitetini tamomladim.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-year">2024</div>
+                    <div class="tl-title" data-i18n="tl_r4">Full-stack dasturchi</div>
+                    <div class="tl-desc" data-i18n="tl_dc4">Murakkab loyihalar: AI botlar, full-stack ilovalar, ma'lumotlar bazasi.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-year">2023</div>
+                    <div class="tl-title" data-i18n="tl_r3">Dasturchi (Freelance)</div>
+                    <div class="tl-desc" data-i18n="tl_dc3">Mijozlar uchun veb-saytlar va Telegram botlar yaratildi.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-year">2022</div>
+                    <div class="tl-title" data-i18n="tl_r2">Junior dasturchi</div>
+                    <div class="tl-desc" data-i18n="tl_dc2">JavaScript va React o'rganildi. Birinchi Telegram botlar yozildi.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-year">2021</div>
+                    <div class="tl-title" data-i18n="tl_r1">Boshlang'ich dasturchi</div>
+                    <div class="tl-desc" data-i18n="tl_dc1">Birinchi veb-sahifalar va oddiy dasturlar yaratildi. Python bilan tanishish boshlandi.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-year">2020</div>
+                    <div class="tl-title" data-i18n="tl_r0">O'quvchi</div>
+                    <div class="tl-desc" data-i18n="tl_dc0">Dasturlash dunyosiga birinchi qadamlar. Internet orqali HTML va CSS o'rganish boshlandi.</div>
+                </div>
+            </div>
+
+            <h2 class="section-title" data-i18n="pr_t">Loyihalardan Misollar (30+)</h2>
+            
+            <!-- MARKAZDA TURUVCHI LOYIHALAR KARUSELI -->
+            <div class="carousel-wrapper">
+                <div class="carousel-container" id="projectCarousel">
+                    
+                    <div class="project-slide active">
+                        <div class="pj-icon">👤</div>
+                        <div class="pj-tags"><span class="pj-tag">HTML/CSS</span><span class="pj-tag">JS</span></div>
+                        <div class="pj-title" data-i18n="w1_t">Shaxsiy Portfolio</div>
+                        <div class="pj-desc" data-i18n="w1_d">Ikki tabli, ko'p tilli, zarrachalar animatsiyali zamonaviy portfolio.</div>
+                        <a href="https://abdufattohov02.github.io/Axrorbek0902/index2.html" class="pj-link" target="_blank" data-i18n="pr_open">Saytni ko'rish →</a>
+                    </div>
+
+                    <div class="project-slide">
+                        <div class="pj-icon">⚽</div>
+                        <div class="pj-tags"><span class="pj-tag">Python</span><span class="pj-tag">aiogram</span></div>
+                        <div class="pj-title" data-i18n="b1_t">Raqib topish boti</div>
+                        <div class="pj-desc" data-i18n="b1_d">eFootball uchun raqib topish, ACKo ko'chirish orqali bal to'plovchi bot.</div>
+                        <span class="pj-link private-link" data-i18n="pr_priv">🔒 Xususiy loyiha</span>
+                    </div>
+
+                    <div class="project-slide">
+                        <div class="pj-icon">🧠</div>
+                        <div class="pj-tags"><span class="pj-tag">Python</span><span class="pj-tag">OpenAI API</span></div>
+                        <div class="pj-title" data-i18n="b3_t">AI orqali ishlaydigan bot</div>
+                        <div class="pj-desc" data-i18n="b3_d">OpenAI API bilan savollarga javob beradigan aqlli bot.</div>
+                        <span class="pj-link private-link" data-i18n="pr_priv">🔒 Xususiy loyiha</span>
+                    </div>
+
+                    <div class="project-slide">
+                        <div class="pj-icon">🛒</div>
+                        <div class="pj-tags"><span class="pj-tag">React</span><span class="pj-tag">Node.js</span></div>
+                        <div class="pj-title" data-i18n="w3_t">Tijorat veb-sayt</div>
+                        <div class="pj-desc" data-i18n="w3_d">Mahsulot ko'rsatish va buyurtma tizimli mijoz sayti.</div>
+                        <span class="pj-link private-link" data-i18n="pr_priv">🔒 Xususiy loyiha</span>
+                    </div>
+
+                    <div class="project-slide">
+                        <div class="pj-icon">🎬</div>
+                        <div class="pj-tags"><span class="pj-tag">Python</span><span class="pj-tag">API</span></div>
+                        <div class="pj-title" data-i18n="b2_t">Kino qidiruvchi bot</div>
+                        <div class="pj-desc" data-i18n="b2_d">Nomi bo'yicha kino qidirib havola yuboradigan bot.</div>
+                        <span class="pj-link private-link" data-i18n="pr_priv">🔒 Xususiy loyiha</span>
+                    </div>
+
+                    <div class="project-slide">
+                        <div class="pj-icon">🙊</div>
+                        <div class="pj-tags"><span class="pj-tag">Python</span><span class="pj-tag">NLP</span></div>
+                        <div class="pj-title" data-i18n="b5_t">Xaqoratli so'z tozalovchi</div>
+                        <div class="pj-desc" data-i18n="b5_d">Guruhda xaqoratli so'zlarni avtomatik o'chiradigan moderator bot.</div>
+                        <span class="pj-link private-link" data-i18n="pr_priv">🔒 Xususiy loyiha</span>
+                    </div>
+                    
+                    <div class="project-slide">
+                        <div class="pj-icon">🏛️</div>
+                        <div class="pj-tags"><span class="pj-tag">Front-end</span></div>
+                        <div class="pj-title" data-i18n="w2_t">Institut veb-sayti</div>
+                        <div class="pj-desc" data-i18n="w2_d">Ta'lim muassasasi uchun rasmiy veb-sayt.</div>
+                        <span class="pj-link private-link" data-i18n="pr_priv">🔒 Xususiy loyiha</span>
+                    </div>
+
+                    <div class="project-slide">
+                        <div class="pj-icon">📚</div>
+                        <div class="pj-tags"><span class="pj-tag">Python</span><span class="pj-tag">Database</span></div>
+                        <div class="pj-title" data-i18n="b4_t">Manba lug'at boti</div>
+                        <div class="pj-desc" data-i18n="b4_d">So'z qidiruvi va tarjima ko'rsatuvchi lug'at boti.</div>
+                        <span class="pj-link private-link" data-i18n="pr_priv">🔒 Xususiy loyiha</span>
+                    </div>
+
+                    <div class="project-slide">
+                        <div class="pj-icon">👥</div>
+                        <div class="pj-tags"><span class="pj-tag">Python</span><span class="pj-tag">aiogram</span></div>
+                        <div class="pj-title" data-i18n="b6_t">Admin aloqa boti</div>
+                        <div class="pj-desc" data-i18n="b6_d">Foydalanuvchilarni admin bilan bog'lovchi xabar tizimi.</div>
+                        <span class="pj-link private-link" data-i18n="pr_priv">🔒 Xususiy loyiha</span>
+                    </div>
+
+                    <div class="project-slide">
+                        <div class="pj-icon">💼</div>
+                        <div class="pj-tags"><span class="pj-tag">Next.js</span></div>
+                        <div class="pj-title" data-i18n="w4_t">Biznes Landing Page</div>
+                        <div class="pj-desc" data-i18n="w4_d">Zamonaviy bir sahifali marketing sayti.</div>
+                        <span class="pj-link private-link" data-i18n="pr_priv">🔒 Xususiy loyiha</span>
+                    </div>
+
+                </div>
+                
+                <!-- Karusel Nuqtalari -->
+                <div class="carousel-controls" id="carouselDots"></div>
+            </div>
+
+        </section>
+    </main>
+</div>
+
+<!-- ========================================== -->
+<!-- SCRIPTS -->
+<!-- ========================================== -->
+<script>
+    // 1. ZARRACHALAR ANIMATSIYASI
+    const canvas = document.getElementById("particles-canvas");
+    const ctx = canvas.getContext("2d");
+    let w, h, particles = [];
+
+    function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * w;
+            this.y = Math.random() * h;
+            this.vx = (Math.random() - 0.5) * 0.4;
+            this.vy = (Math.random() - 0.5) * 0.4;
+            this.r = Math.random() * 1.5 + 0.5;
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 0 || this.x > w) this.vx *= -1;
+            if (this.y < 0 || this.y > h) this.vy *= -1;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(0, 240, 255, 0.4)";
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        particles = [];
+        let num = Math.min(window.innerWidth / 12, 120);
+        for (let i = 0; i < num; i++) particles.push(new Particle());
+    }
+    initParticles();
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+            for (let j = i + 1; j < particles.length; j++) {
+                let dx = particles[i].x - particles[j].x;
+                let dy = particles[i].y - particles[j].y;
+                let dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(176, 38, 255, ${0.15 * (1 - dist / 120)})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // 2. YOZUV (TYPEWRITER) EFFEKTI
+    let words = ["Full-stack Dasturchi", "Telegram Bot Mutaxassisi", "Veb-sayt Yaratuvchi", "AI Dasturchi", "Python Mutaxassisi"];
+    let wordIdx = 0, charIdx = 0, isDeleting = false;
+    const typeEl = document.getElementById("typewriter");
+
+    function typeEffect() {
+        const currentWord = words[wordIdx];
+        if (isDeleting) {
+            typeEl.textContent = currentWord.substring(0, charIdx - 1) + "_";
+            charIdx--;
+        } else {
+            typeEl.textContent = currentWord.substring(0, charIdx + 1) + "_";
+            charIdx++;
+        }
+
+        let speed = isDeleting ? 40 : 80;
+        if (!isDeleting && charIdx === currentWord.length) {
+            speed = 2000;
+            isDeleting = true;
+        } else if (isDeleting && charIdx === 0) {
+            isDeleting = false;
+            wordIdx = (wordIdx + 1) % words.length;
+            speed = 500;
+        }
+        setTimeout(typeEffect, speed);
+    }
+    typeEffect();
+
+    // 3. NUSXA OLISH (COPY)
+    function copyText(text) {
+        navigator.clipboard.writeText(text).catch(err => {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+        });
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000);
+    }
+
+    // 4. LOYIHALAR KARUSELI (SLIDER LOGIKASI)
+    const slides = document.querySelectorAll('.project-slide');
+    const dotsContainer = document.getElementById('carouselDots');
+    let currentSlide = 0;
+    let slideInterval;
+
+    // Nuqtalarni yaratish
+    slides.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.classList.add('carousel-dot');
+        if (idx === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(idx));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    function goToSlide(n) {
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        
+        currentSlide = (n + slides.length) % slides.length;
+        
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+        resetInterval();
+    }
+
+    function nextSlide() {
+        goToSlide(currentSlide + 1);
+    }
+
+    function resetInterval() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 4500); // 4.5 soniyada almashadi
+    }
+    resetInterval();
+
+    // 5. TARJIMALAR (4 TILDA)
+    const translations = {
+        "uz": {
+            "visitors": "Tashrif buyuruvchilar",
+            "location": "📍 Andijon, O'zbekiston <br> 🇰🇷 Hozirda: Koreya (Magistratura)",
+            "social_lbl": "Ijtimoiy Tarmoqlar & Aloqa",
+            "games_lbl": "O'yin Niklari (Nusxalash)",
+            "ab_t": "Men haqimda",
+            "ab_txt": "2002-yilda Andijon viloyati, Izboskan tumanida tug'ilganman. 2020-yilda maktabni, 2025-yilda esa universitetni muvaffaqiyatli tamomladim. Hozirda Koreyada landshaft dizayni yo'nalishi bo'yicha magistratura bosqichida tahsil olmoqdaman. Shu vaqtgacha bugalterlik, dasturlash, kompyuter ta'mirlash, video va rasm montaji sohalarida faoliyat yuritib kelganman. Futbol o'ynashni juda yaxshi ko'raman — ixlosmandligimga kelsak, Andijon va Barselona muxlisiman. Bo'sh vaqtimda esa eFootball Mobile va PUBG Mobile o'ynayman.",
+            "tl_t": "Yillar bo'yicha Tajriba",
+            "tl_y6": "Hozir",
+            "tl_r6": "Dasturchi + Landshaft dizayner",
+            "tl_dc6": "Koreyada landshaft dizayni yo'nalishida magistratura bosqichida o'qimoqdaman. Bir vaqtning o'zida dasturlash loyihalari bilan ham shug'ullanmoqdaman.",
+            "tl_r5": "Oliy ta'lim bitiruvchisi 🎓",
+            "tl_dc5": "Axborot texnologiyalari yo'nalishida Andijon Davlat Universitetini tamomladim.",
+            "tl_r4": "Full-stack dasturchi",
+            "tl_dc4": "Murakkab loyihalar: AI botlar, full-stack ilovalar, ma'lumotlar bazasi.",
+            "tl_r3": "Dasturchi (Freelance)",
+            "tl_dc3": "Mijozlar uchun veb-saytlar va Telegram botlar yaratildi.",
+            "tl_r2": "Junior dasturchi",
+            "tl_dc2": "JavaScript va React o'rganildi. Birinchi Telegram botlar yozildi.",
+            "tl_r1": "Boshlang'ich dasturchi",
+            "tl_dc1": "Birinchi veb-sahifalar va oddiy dasturlar yaratildi. Python bilan tanishish boshlandi.",
+            "tl_r0": "O'quvchi",
+            "tl_dc0": "Dasturlash dunyosiga birinchi qadamlar. Internet orqali HTML va CSS o'rganish boshlandi.",
+            "pr_t": "Loyihalardan Misollar (30+)",
+            "w1_t": "Shaxsiy Portfolio",
+            "w1_d": "Ikki tabli, ko'p tilli, zarrachalar animatsiyali zamonaviy portfolio.",
+            "w2_t": "Institut veb-sayti",
+            "w2_d": "Ta'lim muassasasi uchun rasmiy veb-sayt.",
+            "w3_t": "Tijorat veb-sayt",
+            "w3_d": "Mahsulot ko'rsatish va buyurtma tizimli mijoz sayti.",
+            "w4_t": "Biznes Landing Page",
+            "w4_d": "Zamonaviy bir sahifali marketing sayti.",
+            "b1_t": "Raqib topish boti",
+            "b1_d": "eFootball uchun raqib topish, ACKo ko'chirish orqali bal to'plovchi bot.",
+            "b2_t": "Kino qidiruvchi bot",
+            "b2_d": "Nomi bo'yicha kino qidirib havola yuboradigan bot.",
+            "b3_t": "AI orqali ishlaydigan bot",
+            "b3_d": "OpenAI API bilan savollarga javob beradigan aqlli bot.",
+            "b4_t": "Manba lug'at boti",
+            "b4_d": "So'z qidiruvi va tarjima ko'rsatuvchi lug'at boti.",
+            "b5_t": "Xaqoratli so'z tozalovchi",
+            "b5_d": "Guruhda xaqoratli so'zlarni avtomatik o'chiradigan moderator bot.",
+            "b6_t": "Admin aloqa boti",
+            "b6_d": "Foydalanuvchilarni admin bilan bog'lovchi xabar tizimi.",
+            "pr_open": "Saytni ko'rish →",
+            "pr_priv": "🔒 Xususiy loyiha",
+            "words": ["Full-stack Dasturchi", "Telegram Bot Mutaxassisi", "Veb-sayt Yaratuvchi", "AI Dasturchi", "Python Mutaxassisi"]
+        },
+        "en": {
+            "visitors": "Visitors",
+            "location": "📍 Andijan, Uzbekistan <br> 🇰🇷 Current: Korea (Master's)",
+            "social_lbl": "Social Networks & Contact",
+            "games_lbl": "Gaming Nicks (Click to Copy)",
+            "ab_t": "About Me",
+            "ab_txt": "Born in 2002 in Izboskan district, Andijan region. I finished school in 2020 and graduated from university in 2025. I'm currently a Master's student in Landscape Design in Korea. Up to now I've worked in accounting, programming, computer repair, and video/photo editing. I love playing football — as a fan, I support Andijan FC and FC Barcelona. In my free time I play eFootball Mobile and PUBG Mobile.",
+            "tl_t": "Experience Year by Year",
+            "tl_y6": "Now",
+            "tl_r6": "Developer + Landscape Designer",
+            "tl_dc6": "Studying landscape design at Master's level in Korea. Continuing programming projects at the same time.",
+            "tl_r5": "University Graduate 🎓",
+            "tl_dc5": "Earned a degree in Information Technologies from Andijan State University.",
+            "tl_r4": "Full-stack Developer",
+            "tl_dc4": "Complex projects: AI bots, full-stack apps, database work.",
+            "tl_r3": "Developer (Freelance)",
+            "tl_dc3": "Built websites and Telegram bots for clients.",
+            "tl_r2": "Junior Developer",
+            "tl_dc2": "Learned JavaScript and React. Wrote first Telegram bots.",
+            "tl_r1": "Beginner Developer",
+            "tl_dc1": "Built first web pages and simple programs. Started learning Python.",
+            "tl_r0": "Student",
+            "tl_dc0": "Discovered coding through the internet. Started learning HTML and CSS.",
+            "pr_t": "Project Examples (30+)",
+            "w1_t": "Personal Portfolio",
+            "w1_d": "Two-tab, multilingual, particle-animated modern portfolio.",
+            "w2_t": "University Website",
+            "w2_d": "Official website for an educational institution.",
+            "w3_t": "Business Website",
+            "w3_d": "Product showcase site with order system.",
+            "w4_t": "Business Landing Page",
+            "w4_d": "Modern single-page marketing site with animations.",
+            "b1_t": "Opponent Finder Bot",
+            "b1_d": "eFootball bot for finding opponents and earning points via ACKo copy.",
+            "b2_t": "Movie Search Bot",
+            "b2_d": "Searches movies by name and sends links.",
+            "b3_t": "AI-Powered Bot",
+            "b3_d": "Smart bot powered by OpenAI API.",
+            "b4_t": "Dictionary Bot",
+            "b4_d": "Word search and translation bot.",
+            "b5_t": "Profanity Filter Bot",
+            "b5_d": "Auto-removes offensive words in group chats.",
+            "b6_t": "Admin Contact Bot",
+            "b6_d": "Connects users to admin with messaging system.",
+            "pr_open": "View Site →",
+            "pr_priv": "🔒 Private Project",
+            "words": ["Full-stack Developer", "Telegram Bot Dev", "Web Developer", "AI Developer", "Python Specialist"]
+        },
+        "ru": {
+            "visitors": "Посетители",
+            "location": "📍 Андижан, Узбекистан <br> 🇰🇷 Сейчас: Корея (Магистратура)",
+            "social_lbl": "Социальные сети и Контакты",
+            "games_lbl": "Игровые ники (Нажмите для копирования)",
+            "ab_t": "Обо мне",
+            "ab_txt": "Родился в 2002 году в Избосканском районе Андижанской области. В 2020 году окончил школу, а в 2025 — университет. Сейчас учусь в магистратуре по ландшафтному дизайну в Корее. До этого занимался бухгалтерией, программированием, ремонтом компьютеров, видео- и фотомонтажом. Очень люблю футбол — болею за Андижан и Барселону. В свободное время играю в eFootball Mobile и PUBG Mobile.",
+            "tl_t": "Опыт по годам",
+            "tl_y6": "Сейчас",
+            "tl_r6": "Разработчик + Ландшафтный дизайнер",
+            "tl_dc6": "Обучаюсь в магистратуре по ландшафтному дизайну в Корее. Одновременно работаю над программными проектами.",
+            "tl_r5": "Выпускник университета 🎓",
+            "tl_dc5": "Получил диплом по информационным технологиям. 2025 год.",
+            "tl_r4": "Full-stack разработчик",
+            "tl_dc4": "Сложные проекты: AI боты, full-stack приложения, базы данных.",
+            "tl_r3": "Разработчик (Фриланс)",
+            "tl_dc3": "Создавал сайты и Telegram боты для клиентов.",
+            "tl_r2": "Junior разработчик",
+            "tl_dc2": "Освоил JavaScript и React. Написал первые Telegram боты.",
+            "tl_r1": "Начинающий разработчик",
+            "tl_dc1": "Создал первые сайты и программы. Начал учить Python.",
+            "tl_r0": "Ученик",
+            "tl_dc0": "Открыл для себя программирование через интернет. Начал учить HTML и CSS.",
+            "pr_t": "Примеры проектов (30+)",
+            "w1_t": "Личное портфолио",
+            "w1_d": "Двухвкладочное многоязычное портфолио.",
+            "w2_t": "Сайт института",
+            "w2_d": "Официальный сайт учебного заведения.",
+            "w3_t": "Коммерческий сайт",
+            "w3_d": "Сайт с витриной и системой заказов.",
+            "w4_t": "Лэндинг для бизнеса",
+            "w4_d": "Современный одностраничный маркетинговый сайт.",
+            "b1_t": "Бот поиска соперника",
+            "b1_d": "eFootball бот для поиска соперников и набора очков.",
+            "b2_t": "Бот поиска кино",
+            "b2_d": "Ищет фильмы и отправляет ссылки.",
+            "b3_t": "AI бот",
+            "b3_d": "Умный бот на основе OpenAI API.",
+            "b4_t": "Бот-словарь",
+            "b4_d": "Поиск слов и перевод.",
+            "b5_t": "Фильтр нецензурных слов",
+            "b5_d": "Автоматически удаляет оскорбления в группах.",
+            "b6_t": "Бот связи с админом",
+            "b6_d": "Связывает пользователей с администратором.",
+            "pr_open": "Открыть сайт →",
+            "pr_priv": "🔒 Приватный проект",
+            "words": ["Full-stack разработчик", "Telegram бот разработчик", "Веб-разработчик", "AI разработчик", "Python специалист"]
+        },
+        "kr": {
+            "visitors": "방문자 수",
+            "location": "📍 안디잔, 우즈베키스탄 <br> 🇰🇷 현재: 한국 (석사 과정)",
+            "social_lbl": "소셜 네트워크 및 연락처",
+            "games_lbl": "게임 닉네임 (클릭하여 복사)",
+            "ab_t": "소개",
+            "ab_txt": "2002년 우즈베키스탄 안디잔주 이즈보스칸 지역에서 태어났습니다. 2020년에 학교를, 2025년에 대학교를 졸업했습니다. 현재 한국에서 조경학 석사 과정을 공부하고 있습니다. 그동안 회계, 프로그래밍, 컴퓨터 수리, 영상 및 사진 편집 분야에서 일해왔습니다. 축구를 매우 좋아하며 안디잔과 바르셀로나를 응원합니다. 여가 시간에는 eFootball Mobile과 PUBG Mobile을 즐깁니다.",
+            "tl_t": "연도별 경력",
+            "tl_y6": "현재",
+            "tl_r6": "개발자 + 조경 디자이너",
+            "tl_dc6": "한국에서 조경학 석사 과정 공부 중. 동시에 프로그래밍 프로젝트도 계속 진행 중.",
+            "tl_r5": "대학교 졸업생 🎓",
+            "tl_dc5": "안디잔 국립대학교에서 정보기술 학위 취득.",
+            "tl_r4": "풀스택 개발자",
+            "tl_dc4": "복잡한 프로젝트: AI 봇, 풀스택 앱, 데이터베이스 작업.",
+            "tl_r3": "개발자 (프리랜서)",
+            "tl_dc3": "클라이언트를 위한 웹사이트 및 텔레그램 봇 제작.",
+            "tl_r2": "주니어 개발자",
+            "tl_dc2": "JavaScript와 React 습득. 첫 텔레그램 봇 작성.",
+            "tl_r1": "초보 개발자",
+            "tl_dc1": "첫 웹페이지 제작. Python 학습 시작.",
+            "tl_r0": "학생",
+            "tl_dc0": "인터넷을 통해 코딩을 발견. HTML과 CSS 학습 시작.",
+            "pr_t": "프로젝트 예시 (30+)",
+            "w1_t": "개인 포트폴리오",
+            "w1_d": "2탭 다국어 현대적 포트폴리오.",
+            "w2_t": "대학교 웹사이트",
+            "w2_d": "교육 기관 공식 웹사이트.",
+            "w3_t": "비즈니스 웹사이트", "w3.d": "제품 쇼케이스 및 주문 시스템 사이트.",
+            "w4_t": "비즈니스 랜딩 페이지",
+            "w4_d": "애니메이션이 있는 마케팅 사이트.",
+            "b1_t": "상대방 찾기 봇",
+            "b1_d": "eFootball 상대방 찾기 및 ACKo 포인트 봇.",
+            "b2_t": "영화 검색 봇",
+            "b2_d": "영화 이름으로 검색 후 링크 전송.",
+            "b3_t": "AI 봇",
+            "b3_d": "OpenAI API 기반 스마트 봇.",
+            "b4_t": "사전 봇",
+            "b4_d": "단어 검색 및 번역 봇.",
+            "b5_t": "욕설 필터 봇",
+            "b5_d": "그룹에서 욕설 자동 삭제 봇.",
+            "b6_t": "관리자 연락 봇",
+            "b6_d": "사용자와 관리자 연결 봇.",
+            "pr_open": "사이트 보기 →",
+            "pr_priv": "🔒 비공개 프로젝트",
+            "words": ["풀스택 개발자", "텔레그램 봇 개발자", "웹 개발자", "AI 개발자", "파이썬 전문가"]
+        }
+    };
+
+    function switchLang(lang) {
+        document.querySelectorAll('.lang-switcher button').forEach(btn => {
+            btn.classList.remove('active');
+            if(btn.textContent.toLowerCase() === lang) btn.classList.add('active');
+        });
+
+        const data = translations[lang];
+        if(!data) return;
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if(data[key]) {
+                el.innerHTML = data[key];
+            }
+        });
+
+        words = data.words;
+    }
+
+</script>
+</body>
+</html>
